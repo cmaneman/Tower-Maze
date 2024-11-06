@@ -19,7 +19,7 @@ public class CoinScript : MonoBehaviour
     {
         //coinCount++;
         coinSound.Play();
-        Debug.Log("This is: " + name);
+        //Debug.Log("This is: " + name);
         //UpdateScoreText();
         StartCoroutine(TimeBeforeDestroy(0.15f));
         

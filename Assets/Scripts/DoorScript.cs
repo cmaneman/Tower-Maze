@@ -8,7 +8,7 @@ public class DoorScript : MonoBehaviour
     //[SerializeField] private bool DoorUnlockCheck = false;
     [SerializeField] private BoxCollider2D Door2D;
 
-    public AudioSource DoorSound;
+    [SerializeField] private AudioSource DoorSound;
     // Start is called before the first frame update
 
     void Start()
@@ -45,7 +45,6 @@ public class DoorScript : MonoBehaviour
         DoorSound.Play();
         StartCoroutine(TimeBeforeDisable());
           
-
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -59,7 +58,7 @@ public class DoorScript : MonoBehaviour
 
     private IEnumerator TimeBeforeDisable()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
         Door2D.gameObject.SetActive(false); 
     }
 }
