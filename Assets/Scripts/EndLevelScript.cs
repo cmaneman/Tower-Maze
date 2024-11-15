@@ -5,6 +5,8 @@ public class EndLevelScript : MonoBehaviour
 {
     public GameObject EndLevelPortal;
     public AudioSource EndSound;
+
+    private Transform portalOriginTransform;
     private float rotationSpeed = 360f; // Degrees per second
     private float rotationDuration = 2f; // Duration in seconds
 
@@ -15,32 +17,34 @@ public class EndLevelScript : MonoBehaviour
     void Start()
     {
         EndLevelPortal = gameObject;
+        portalOriginTransform = EndLevelPortal.transform;
         EndSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
-    void EndCurrentLevel()
+    void EndCurrentLevel(Collider2D other)
     {
         EndSound.Play();
-        PlayerTransform = EndLevelPortal.transform;
-        StartCoroutine(RotateForSeconds(rotationDuration));
+        //other.gameObject.transform = EndLevelPortal.transform; //won't work...read only
+        StartCoroutine(RotateForSeconds(rotationDuration, other));
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("Player"))
         {
-            EndCurrentLevel();
+            EndCurrentLevel(other);
         }
     }
-    private IEnumerator RotateForSeconds(float duration) //The issue now is that the portal rotates but not the player...
+    private IEnumerator RotateForSeconds(float duration, Collider2D other) //The issue now is that the portal rotates but not the player...
     {
         float elapsed = 0f;
 
         while (elapsed < duration)
         {
             float rotationAmount = rotationSpeed * Time.deltaTime;
-            PlayerTransform.Rotate(0, 0, rotationAmount); // Rotate on the X-axis 
+            //other.gameObject.transform.Rotate(0, 0, rotationAmount); // Rotate on the Z-axis 
+            other.transform.Rotate(0, 0, rotationAmount); // Rotate the portal
             elapsed += Time.deltaTime;
             yield return null; // Wait for the next frame
         }

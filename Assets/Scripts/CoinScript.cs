@@ -17,7 +17,7 @@ public class CoinScript : MonoBehaviour
 
     private void CollectCoin()
     {
-        //coinCount++;
+        PlayerScript.coinCount++;
         coinSound.Play();
         //Debug.Log("This is: " + name);
         //UpdateScoreText();
@@ -34,7 +34,6 @@ public class CoinScript : MonoBehaviour
         if(other.CompareTag("Player"))
         { 
             CollectCoin();
-
         }
     }
 private IEnumerator TimeBeforeDestroy(float delay)

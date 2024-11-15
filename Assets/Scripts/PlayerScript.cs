@@ -13,7 +13,8 @@ public class PlayerScript : MonoBehaviour
     public Rigidbody2D Player;
     public GameObject coin;
     public Text scoreText; //Can probably be static...
-    [SerializeField] private int coinCount = 0; //score
+    [SerializeField] private int initialCoinCount = 0;
+    public static int coinCount = 0; //score
 
 
     [SerializeField] float horizontal;
@@ -28,6 +29,9 @@ public class PlayerScript : MonoBehaviour
         Player = GetComponent<Rigidbody2D>();
         //Debug.Log("This is Player: ", Player);
         UpdateScoreText();
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+        coinCount = initialCoinCount;
+        //Maybe use a boolean to disallow the player control until the next level...
 
     }
 
@@ -37,6 +41,8 @@ public class PlayerScript : MonoBehaviour
         // Gives a value between -1 and 1
         horizontal = Input.GetAxisRaw("Horizontal"); // -1 is left
         vertical = Input.GetAxisRaw("Vertical"); // -1 is down
+        UpdateScoreText();
+        Debug.Log("coin Num: " + coinCount);
     }
 
     void FixedUpdate()
@@ -51,14 +57,19 @@ public class PlayerScript : MonoBehaviour
         Player.linearVelocity = new Vector2(horizontal * runSpeed, vertical * runSpeed);
     }
 
-    /*private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
 
-        ;
-    }*/
+        if(other.CompareTag("EndLevelPortal"))
+        {
+            transform.localPosition = other.gameObject.transform.position;
+            //Maybe disable movement until the next level is available...?
+        }
+
+    }
 
     
-    private void UpdateScoreText()
+    public void UpdateScoreText()
     {
         scoreText.text = "Coins: " + coinCount; // Update the UI text with the current score
     }

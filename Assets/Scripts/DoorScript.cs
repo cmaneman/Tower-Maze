@@ -9,8 +9,6 @@ public class DoorScript : MonoBehaviour
     [SerializeField] private BoxCollider2D Door2D;
 
     [SerializeField] private AudioSource DoorSound;
-    // Start is called before the first frame update
-
     void Start()
     {
         Door2D = GetComponent<BoxCollider2D>();
