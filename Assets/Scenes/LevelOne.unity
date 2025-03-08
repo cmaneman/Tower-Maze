@@ -803,6 +803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4acd934faef527343a6055688a474011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelCompleteScreen: {fileID: 1082046806}
 --- !u!4 &401315702
 Transform:
   m_ObjectHideFlags: 0
