@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,7 +13,7 @@ public class PlayerScript : MonoBehaviour
 
     public Rigidbody2D Player;
     public GameObject coin;
-    public Text scoreText; //Can probably be static...
+    public TMP_Text scoreText; //Can probably be static... ///Get text by making a new script and make an object to get it
     [SerializeField] private int initialCoinCount = 0;
     public static int coinCount = 0; //score
 
@@ -42,7 +43,7 @@ public class PlayerScript : MonoBehaviour
         horizontal = Input.GetAxisRaw("Horizontal"); // -1 is left
         vertical = Input.GetAxisRaw("Vertical"); // -1 is down
         UpdateScoreText();
-        Debug.Log("coin Num: " + coinCount);
+        //Debug.Log("coin Num: " + coinCount);
     }
 
     void FixedUpdate()
