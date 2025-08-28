@@ -25,7 +25,7 @@ public class DoorScript : MonoBehaviour
     public void DoorAccess()
     {
 
-        Debug.Log(Door2D.isTrigger);
+        //Debug.Log(Door2D.isTrigger);
 
         if(KeyObtainScript.KeyGetCheck == true)
         {
