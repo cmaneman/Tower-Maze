@@ -10,6 +10,7 @@ public class EndLevelScript : MonoBehaviour
     private Transform portalOriginTransform;
     private float rotationSpeed = 360f; // Degrees per second
     private float rotationDuration = 2f; // Duration in seconds
+    public bool isLevelEnded = false;
 
     [SerializeField] private Transform PlayerTransform;
     //private Transform OriginalPlayerTransform;
@@ -39,6 +40,7 @@ public class EndLevelScript : MonoBehaviour
     {
         //EndSound.Play();
         //other.gameObject.transform = EndLevelPortal.transform; //won't work...read only
+        isLevelEnded = true;
 
         if (EndSound != null)
         {
