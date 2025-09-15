@@ -14,9 +14,12 @@ public class BackgroundMusicController : MonoBehaviour
     [SerializeField] private BackgroundMusicTracks bgmTracks;
     private Dictionary<MusicTrack, AudioSource> musicTracks;
     private int currentSceneIndex;
+    [SerializeField] EndLevelScript endlevelBool;
 
     void Start()
     {
+
+        endlevelBool.OnLevelEnd += HandleLevelEnd;
         musicTracks = new Dictionary<MusicTrack, AudioSource>
         {
             { MusicTrack.EarlyFloors, bgmTracks.earlyFloorsClip },
@@ -24,7 +27,7 @@ public class BackgroundMusicController : MonoBehaviour
             { MusicTrack.LateFloors, bgmTracks.lateFloorsClip },
             { MusicTrack.Etc, bgmTracks.etcClip }
         };
-        
+
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         AssignMusicTrack(currentSceneIndex);
     }
@@ -43,11 +46,22 @@ public class BackgroundMusicController : MonoBehaviour
                 break;
             case 2:
                 musicTracks[MusicTrack.LateFloors].Play();
-                Debug.Log("Playing LateFloors music track.", musicTracks[MusicTrack.LateFloors]);   
+                Debug.Log("Playing LateFloors music track.", musicTracks[MusicTrack.LateFloors]);
                 break;
             default:
                 ; //Do nothing
                 break;
+        }
+    }
+    private void HandleLevelEnd()
+    {
+        foreach (var track in musicTracks)
+        {
+            if (track.Value.isPlaying)
+            {
+                track.Value.Stop();
+            }
+            
         }
     }
 

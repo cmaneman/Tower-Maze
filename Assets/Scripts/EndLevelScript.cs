@@ -2,15 +2,16 @@ using System.Collections;
 using UnityEngine;
 public class EndLevelScript : MonoBehaviour
 {
+    public delegate void LevelEndAction();
+    public event LevelEndAction OnLevelEnd;
     public GameObject EndLevelPortal;
-    public AudioSource EndSound;
-
     public TMPro.TMP_Text LevelComText; // Assign the Canvas GameObject in the Inspector
+    private AudioSource winLevelSound;
 
     private Transform portalOriginTransform;
     private float rotationSpeed = 360f; // Degrees per second
     private float rotationDuration = 2f; // Duration in seconds
-    public bool isLevelEnded = false;
+    public bool isLevelEnded;
 
     [SerializeField] private Transform PlayerTransform;
     //private Transform OriginalPlayerTransform;
@@ -20,37 +21,24 @@ public class EndLevelScript : MonoBehaviour
     {
         EndLevelPortal = gameObject;
         portalOriginTransform = EndLevelPortal.transform;
-        EndSound = GetComponent<AudioSource>();
         LevelComText.gameObject.SetActive(false);
-        //LCUI_Text.levelCompleteText = GetComponentInChildren<TMPro.TMP_Text>();
-
-
-        /*if (!LevelComText)
-        {
-            Debug.LogError("LvlCompleteText is not assigned in the inspector.");
-        }
-        else
-        {
-            Debug.Log("LvlCompleteText is assigned.");
-        }*/
+        isLevelEnded = false;
+        winLevelSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     public void EndCurrentLevel(Collider2D other)
     {
-        //EndSound.Play();
-        //other.gameObject.transform = EndLevelPortal.transform; //won't work...read only
         isLevelEnded = true;
-
-        if (EndSound != null)
+        OnLevelEnd?.Invoke();
+        if (winLevelSound != null)
         {
-            EndSound.Play();
+            winLevelSound.Play();
         }
         else
         {
-            Debug.LogError("EndSound is not assigned.");
+            Debug.LogError("Win level sound AudioSource is not assigned.");
         }
-
         StartCoroutine(RotateForSeconds(rotationDuration, other));
 
         if (LevelComText != null)
@@ -64,7 +52,6 @@ public class EndLevelScript : MonoBehaviour
             Debug.LogError("LvlCompleteText is not assigned.");
         }
 
-        //LvlCompleteText.ShowLevelCompleteScreen();
     }
 
     void OnTriggerEnter2D(Collider2D other)
