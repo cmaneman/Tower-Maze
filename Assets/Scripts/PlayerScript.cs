@@ -7,7 +7,9 @@ using UnityEngine.UI;
 //Idea: End Door to an end level portal(animated sprite)?
 //Make level now...
 //Added background...
-
+/// <summary>
+/// 10/30/2025: To Do: Connect things together for lvl 2 and set music and stuff along with UI amd coin collection....
+/// </summary>
 public class PlayerScript : MonoBehaviour
 {
 

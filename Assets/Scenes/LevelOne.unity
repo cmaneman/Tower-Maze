@@ -1858,7 +1858,7 @@ GameObject:
   - component: {fileID: 764782081}
   - component: {fileID: 764782080}
   m_Layer: 0
-  m_Name: pattern-1929506_1280_0
+  m_Name: LevelBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
