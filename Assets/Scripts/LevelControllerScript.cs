@@ -7,7 +7,14 @@ public class LevelManagerControllerScript : MonoBehaviour
     {
         // Load the next level (assuming levels are sequentially numbered)
         int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        SceneManager.LoadScene(nextSceneIndex);
+        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(nextSceneIndex);
+        }
+        else
+        {
+            LoadLevelOne();
+        }
     }
 
     public void RestartLevel()
@@ -16,9 +23,13 @@ public class LevelManagerControllerScript : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-     public void MainMenu()
+    public void MainMenu()
     {
         // Load the main menu scene (assuming it’s at index 0 or named "MainMenu")
         SceneManager.LoadScene("MainMenu");
+    }
+    public void LoadLevelOne()
+    {
+        SceneManager.LoadScene("Scenes/LevelOne");
     }
 }

@@ -1,7 +1,9 @@
 using System.Collections;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 public class EndLevelScript : MonoBehaviour
 {
+    LevelManagerControllerScript levelManagerControllerScript = new LevelManagerControllerScript();
     public delegate void LevelEndAction();
     public event LevelEndAction OnLevelEnd;
     public GameObject EndLevelPortal;
@@ -20,6 +22,7 @@ public class EndLevelScript : MonoBehaviour
     void Start()
     {
         EndLevelPortal = gameObject;
+        //levelManagerControllerScript = GetComponent<LevelManagerControllerScript>();
         portalOriginTransform = EndLevelPortal.transform;
         LevelComText.gameObject.SetActive(false);
         isLevelEnded = false;
@@ -89,6 +92,7 @@ public class EndLevelScript : MonoBehaviour
             text.color = new Color(text.color.r, text.color.g, text.color.b, opacity);
             elapsed += Time.deltaTime;
             yield return null; // Wait for the next frame
+            levelManagerControllerScript.NextLevel();
         }
 
         text.color = new Color(text.color.r, text.color.g, text.color.b, 1f);

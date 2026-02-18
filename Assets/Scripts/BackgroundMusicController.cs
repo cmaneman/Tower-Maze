@@ -29,6 +29,7 @@ public class BackgroundMusicController : MonoBehaviour
         };
 
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        Debug.Log("Current Scene Index: " + currentSceneIndex);
         AssignMusicTrack(currentSceneIndex);
     }
 
@@ -42,7 +43,7 @@ public class BackgroundMusicController : MonoBehaviour
                 break;
             case 1:
                 musicTracks[MusicTrack.MidFloors].Play();
-                Debug.Log("Playing MidFloors music track.", musicTracks[MusicTrack.MidFloors]);
+                Debug.Log("Playing MidFloors music track.", musicTracks[MusicTrack.MidFloors]); //Music by <a href="https://pixabay.com/users/htb-music-44086723/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=291401">H Tb HEON</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=291401">Pixabay</a>
                 break;
             case 2:
                 musicTracks[MusicTrack.LateFloors].Play();
