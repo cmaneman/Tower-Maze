@@ -3,7 +3,8 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 public class EndLevelScript : MonoBehaviour
 {
-    LevelManagerControllerScript levelManagerControllerScript = new LevelManagerControllerScript();
+    [SerializeField] private LevelManagerControllerScript levelManagerControllerScript;
+
     public delegate void LevelEndAction();
     public event LevelEndAction OnLevelEnd;
     public GameObject EndLevelPortal;
@@ -30,6 +31,13 @@ public class EndLevelScript : MonoBehaviour
     }
 
     // Update is called once per frame
+    /*void Update()
+    {
+        if(levelManagerControllerScript == null)
+        {
+            Debug.LogError("LevelManagerControllerScript component is missing on the GameObject.");
+        }
+    }*/
     public void EndCurrentLevel(Collider2D other)
     {
         isLevelEnded = true;
@@ -91,7 +99,7 @@ public class EndLevelScript : MonoBehaviour
             float opacity = Mathf.Lerp(0f, 1f, elapsed / duration);
             text.color = new Color(text.color.r, text.color.g, text.color.b, opacity);
             elapsed += Time.deltaTime;
-            yield return null; // Wait for the next frame
+            yield return new WaitForSeconds(5); // Wait for the next frame
             levelManagerControllerScript.NextLevel();
         }
 

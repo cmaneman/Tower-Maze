@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,6 +8,7 @@ public class LevelManagerControllerScript : MonoBehaviour
     {
         // Load the next level (assuming levels are sequentially numbered)
         int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        Debug.Log("Next level index: " + nextSceneIndex);
         if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
         {
             SceneManager.LoadScene(nextSceneIndex);

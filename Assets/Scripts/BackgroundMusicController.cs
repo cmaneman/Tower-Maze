@@ -35,6 +35,7 @@ public class BackgroundMusicController : MonoBehaviour
 
     private void AssignMusicTrack(int sceneIndex)
     {
+        Debug.Log("Assigning music track for scene index: " + sceneIndex);
         switch (sceneIndex)
         {
             case 0:
@@ -67,3 +68,7 @@ public class BackgroundMusicController : MonoBehaviour
     }
 
 }
+
+///Sound Effect by <a href="https://pixabay.com/users/liecio-3298866/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=190288">LIECIO</a> from <a href="https://pixabay.com/sound-effects//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=190288">Pixabay</a>
+///Sound Effect by <a href="https://pixabay.com/users/liecio-3298866/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=190255">LIECIO</a> from <a href="https://pixabay.com/sound-effects//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=190255">Pixabay</a>
+///Music by <a href="https://pixabay.com/users/htb-music-44086723/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=387495">HTb-music</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=387495">Pixabay</a>

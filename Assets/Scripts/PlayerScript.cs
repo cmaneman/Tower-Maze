@@ -4,6 +4,8 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+
+[RequireComponent(typeof(Rigidbody2D))]
 //Idea: End Door to an end level portal(animated sprite)?
 //Make level now...
 //Added background...
@@ -24,7 +26,9 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] float vertical;
     [SerializeField] float moveLimiter = 0.7f;
 
-    public float runSpeed = 20.0f;
+    public float walkSpeed = 10.0f;
+    public float runSpeed = 15.0f;
+    public bool isRunning = false;
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +50,7 @@ public class PlayerScript : MonoBehaviour
         vertical = Input.GetAxisRaw("Vertical"); // -1 is down
         UpdateScoreText();
         //Debug.Log("coin Num: " + coinCount);
+        PlayerRun();
     }
 
     void FixedUpdate()
@@ -57,7 +62,8 @@ public class PlayerScript : MonoBehaviour
             vertical *= moveLimiter;
         }
 
-        Player.linearVelocity = new Vector2(horizontal * runSpeed, vertical * runSpeed);
+        //Player.linearVelocity = new Vector2(horizontal * walkSpeed, vertical * walkSpeed);
+        PlayerRun();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -69,6 +75,19 @@ public class PlayerScript : MonoBehaviour
             //Maybe disable movement until the next level is available...?
         }
 
+    }
+    private void PlayerRun()
+    {
+        if (Input.GetKey(KeyCode.Space)) // Check if the space key is held down
+        {
+            isRunning = true;
+            Player.linearVelocity = new Vector2(horizontal * runSpeed, vertical * runSpeed);
+        }
+        else
+        {
+            isRunning = false;
+            Player.linearVelocity = new Vector2(horizontal * walkSpeed, vertical * walkSpeed);
+        }
     }
 
     
